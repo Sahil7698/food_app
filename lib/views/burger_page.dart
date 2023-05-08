@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:food_app/views/details_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class BurgerPage extends StatefulWidget {
+  const BurgerPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<BurgerPage> createState() => _BurgerPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _BurgerPageState extends State<BurgerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,15 +135,7 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               children: [
                 categories(image: "assets/images/1.png", title: "All"),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/burger_page');
-                  },
-                  child: categories(
-                    image: "assets/images/2.png",
-                    title: "Burger",
-                  ),
-                ),
+                categories(image: "assets/images/2.png", title: "Burger"),
                 categories(image: "assets/images/3.png", title: "Drinks"),
                 categories(image: "assets/images/4.png", title: "Recipe"),
                 categories(image: "assets/images/5.png", title: "Snacks"),
@@ -179,10 +171,6 @@ class _HomePageState extends State<HomePage> {
                     image: "assets/images/2.png", name: "Burger", price: "120"),
                 itemCountainer(
                     image: "assets/images/3.png", name: "Drinks", price: "30"),
-                itemCountainer(
-                    image: "assets/images/4.png", name: "Recipe", price: "540"),
-                itemCountainer(
-                    image: "assets/images/5.png", name: "Snacks", price: "80"),
               ],
             ),
           ),
