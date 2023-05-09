@@ -6,14 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/helpers/firestore_helper.dart';
 
-class BurgerPage extends StatefulWidget {
-  const BurgerPage({Key? key}) : super(key: key);
+class SnackPage extends StatefulWidget {
+  const SnackPage({Key? key}) : super(key: key);
 
   @override
-  State<BurgerPage> createState() => _BurgerPageState();
+  State<SnackPage> createState() => _SnackPageState();
 }
 
-class _BurgerPageState extends State<BurgerPage> {
+class _SnackPageState extends State<SnackPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,7 +190,7 @@ class _BurgerPageState extends State<BurgerPage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: StreamBuilder(
-                stream: FirestoreHelper.firestoreHelper.burgerRecords(),
+                stream: FirestoreHelper.firestoreHelper.snackRecords(),
                 builder: (context, snapShot) {
                   if (snapShot.hasError) {
                     return Center(

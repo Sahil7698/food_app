@@ -1,10 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({
-    Key? key,
-  }) : super(key: key);
+  final Map data;
+  const DetailPage({Key? key, required this.data}) : super(key: key);
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -32,7 +33,7 @@ class _DetailPageState extends State<DetailPage> {
         alignment: Alignment.center,
         children: [
           Container(
-            color: Colors.deepPurple,
+            color: Colors.red,
             alignment: Alignment.bottomCenter,
             height: double.infinity,
             width: double.infinity,
@@ -68,7 +69,7 @@ class _DetailPageState extends State<DetailPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Pizza",
+                                "${widget.data['name']}",
                                 style: GoogleFonts.exo2(
                                   textStyle: const TextStyle(
                                     fontSize: 25,
@@ -79,11 +80,11 @@ class _DetailPageState extends State<DetailPage> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 5),
                                 child: Text(
-                                  "780",
+                                  "${widget.data['price']} ₹",
                                   style: GoogleFonts.exo2(
                                     textStyle: const TextStyle(
                                       fontSize: 20,
-                                      color: Colors.deepPurple,
+                                      color: Colors.red,
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
@@ -96,7 +97,7 @@ class _DetailPageState extends State<DetailPage> {
                             width: 140,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Colors.deepPurple,
+                              color: Colors.red,
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -140,29 +141,29 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30, bottom: 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "",
-                              style: GoogleFonts.exo2(
-                                textStyle: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.deepPurple,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 30, bottom: 30),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     children: [
+                      //       Text(
+                      //         "",
+                      //         style: GoogleFonts.exo2(
+                      //           textStyle: const TextStyle(
+                      //             fontSize: 20,
+                      //             color: Colors.red,
+                      //             fontWeight: FontWeight.w700,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.only(top: 10),
                             child: Text(
                               "About food",
                               style: GoogleFonts.exo2(
@@ -174,7 +175,7 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           ),
                           Text(
-                            "",
+                            "${widget.data['des']}",
                             style: GoogleFonts.exo2(
                               textStyle: const TextStyle(
                                 fontSize: 18,
@@ -196,10 +197,13 @@ class _DetailPageState extends State<DetailPage> {
             child: Container(
               height: 200,
               width: 200,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                image:
-                    DecorationImage(image: AssetImage("assets/images/1.png")),
+                image: DecorationImage(
+                  image: MemoryImage(
+                    base64Decode(widget.data['image']),
+                  ),
+                ),
               ),
             ),
           ),

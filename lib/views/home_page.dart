@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/views/details_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../controllers/helpers/firestore_helper.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,7 +24,7 @@ class _HomePageState extends State<HomePage> {
           children: const [
             Icon(
               Icons.location_on,
-              color: Colors.deepPurple,
+              color: Colors.red,
             ),
             Text(
               "Kapodra, SURAT",
@@ -36,7 +41,7 @@ class _HomePageState extends State<HomePage> {
             width: 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.deepPurple,
+              color: Colors.red,
             ),
             child: IconButton(
               onPressed: () {},
@@ -58,218 +63,221 @@ class _HomePageState extends State<HomePage> {
                       "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
                   fit: BoxFit.cover,
                 ),
-                color: Colors.deepPurple,
+                color: Colors.red,
               ),
             ),
           ),
         ],
       ),
-      body: ListView(
+      body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 8, right: 20, top: 10),
-            child: Text(
-              "Hi Sahil",
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 8, right: 20, top: 5),
-            child: Text(
-              "Find your food",
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.deepPurple.shade50,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                children: [
-                  const SizedBox(
-                    width: 10,
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 8, right: 20, top: 10),
+                  child: Text(
+                    "Hi Sahil",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red),
                   ),
-                  const Icon(
-                    Icons.search,
-                    color: Colors.deepPurple,
-                    size: 30,
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 8, right: 20, top: 5),
+                  child: Text(
+                    "Find your food",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                  Text(
-                    "Search Food",
-                    style:
-                        GoogleFonts.poppins(color: Colors.grey, fontSize: 18),
-                  ),
-                  const SizedBox(
-                    width: 170,
-                  ),
-                  Container(
-                    height: 40,
-                    width: 40,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Container(
+                    height: 50,
+                    width: double.infinity,
                     decoration: BoxDecoration(
+                      color: Colors.red.shade50,
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.deepPurple,
                     ),
-                    child: const Icon(
-                      Icons.filter_list,
-                      color: Colors.white,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Icon(
+                          Icons.search,
+                          color: Colors.red,
+                          size: 30,
+                        ),
+                        Text(
+                          "Search Food",
+                          style: GoogleFonts.poppins(
+                              color: Colors.grey, fontSize: 18),
+                        ),
+                        const SizedBox(
+                          width: 170,
+                        ),
+                        Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.red,
+                          ),
+                          child: const Icon(
+                            Icons.filter_list,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                categories(image: "assets/images/1.png", title: "All"),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/burger_page');
-                  },
-                  child: categories(
-                    image: "assets/images/2.png",
-                    title: "Burger",
                   ),
                 ),
-                categories(image: "assets/images/3.png", title: "Drinks"),
-                categories(image: "assets/images/4.png", title: "Recipe"),
-                categories(image: "assets/images/5.png", title: "Snacks"),
-              ],
-            ),
-          ),
-          Container(
-            height: 450,
-            child: GridView.count(
-              crossAxisCount: 2,
-              crossAxisSpacing: 0,
-              mainAxisSpacing: 1,
-              primary: false,
-              shrinkWrap: false,
-              childAspectRatio: 0.75,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DetailPage(),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/home_page');
+                        },
+                        child: categories(
+                            image: "assets/images/1.png", title: "Pizza"),
                       ),
-                    );
-                  },
-                  child: itemCountainer(
-                    image: "assets/images/1.png",
-                    name: "Pizza",
-                    price: "780",
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/burger_page');
+                        },
+                        child: categories(
+                          image: "assets/images/2.png",
+                          title: "Burger",
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/drink_page');
+                        },
+                        child: categories(
+                            image: "assets/images/3.png", title: "Drinks"),
+                      ),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/recipe_page');
+                          },
+                          child: categories(
+                              image: "assets/images/4.png", title: "Recipe")),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/snack_page');
+                        },
+                        child: categories(
+                            image: "assets/images/5.png", title: "Snacks"),
+                      ),
+                    ],
                   ),
                 ),
-                itemCountainer(
-                    image: "assets/images/2.png", name: "Burger", price: "120"),
-                itemCountainer(
-                    image: "assets/images/3.png", name: "Drinks", price: "30"),
-                itemCountainer(
-                    image: "assets/images/4.png", name: "Recipe", price: "540"),
-                itemCountainer(
-                    image: "assets/images/5.png", name: "Snacks", price: "80"),
               ],
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: StreamBuilder(
+                stream: FirestoreHelper.firestoreHelper.pizzaRecords(),
+                builder: (context, snapShot) {
+                  if (snapShot.hasError) {
+                    return Center(
+                      child: Text("Error : ${snapShot.error}"),
+                    );
+                  } else if (snapShot.hasData) {
+                    QuerySnapshot<Map<String, dynamic>>? data = snapShot.data;
+
+                    if (data == null) {
+                      return const Center(
+                        child: Text("No Any Data Available...."),
+                      );
+                    } else {
+                      List<QueryDocumentSnapshot<Map<String, dynamic>>>
+                          allBurger = data.docs;
+
+                      return GridView.count(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 15,
+                        primary: false,
+                        shrinkWrap: false,
+                        children: List.generate(
+                          allBurger.length,
+                          (index) => GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailPage(
+                                    data: allBurger[index].data(),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 200,
+                              width: 180,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.red.shade50,
+                              ),
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 60,
+                                    backgroundColor: Colors.red.shade50,
+                                    backgroundImage: MemoryImage(
+                                      base64Decode(
+                                        allBurger[index].data()['image'],
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${allBurger[index].data()['name']}',
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "₹ ${allBurger[index].data()['price']}",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.red,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget itemCountainer(
-      {required String image, required String name, required String price}) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Container(
-        height: 260,
-        width: 180,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.deepPurple.shade50,
-        ),
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 60,
-              backgroundColor: Colors.deepPurple.shade50,
-              backgroundImage: AssetImage(
-                image,
-              ),
-            ),
-            ListTile(
-              leading: Text(
-                name,
-                style: GoogleFonts.poppins(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-              trailing: Text(
-                "₹ $price",
-                style: GoogleFonts.poppins(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.deepPurple),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.favorite_border,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.deepPurple),
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.shopping_cart,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -288,7 +296,7 @@ class _HomePageState extends State<HomePage> {
               ),
               fit: BoxFit.cover,
             ),
-            color: Colors.deepPurple.shade50,
+            color: Colors.red.shade50,
             borderRadius: BorderRadius.circular(10),
           ),
         ),
