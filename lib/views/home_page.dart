@@ -279,6 +279,16 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red.shade100,
+        onPressed: () {
+          Navigator.pushNamed(context, '/cart_page');
+        },
+        child: const Icon(
+          Icons.shopping_cart,
+          color: Colors.red,
+        ),
+      ),
     );
   }
 

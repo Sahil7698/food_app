@@ -28,6 +28,14 @@ class _DetailPageState extends State<DetailPage> {
         ),
         centerTitle: true,
         elevation: 0,
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.favorite,
+                color: Colors.red,
+              ))
+        ],
       ),
       body: Stack(
         alignment: Alignment.center,
@@ -141,24 +149,6 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ],
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(top: 30, bottom: 30),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     children: [
-                      //       Text(
-                      //         "",
-                      //         style: GoogleFonts.exo2(
-                      //           textStyle: const TextStyle(
-                      //             fontSize: 20,
-                      //             color: Colors.red,
-                      //             fontWeight: FontWeight.w700,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/views/burger_page.dart';
+import 'package:food_app/views/cart_page.dart';
 import 'package:food_app/views/details_page.dart';
 import 'package:food_app/views/drinks_page.dart';
+import 'package:food_app/views/favorite_page.dart';
 import 'package:food_app/views/home_page.dart';
 import 'package:food_app/views/recipe_page.dart';
 import 'package:food_app/views/snack_page.dart';
@@ -25,6 +27,8 @@ void main() async {
         GetPage(name: '/drink_page', page: () => const DrinkPage()),
         GetPage(name: '/recipe_page', page: () => const RecipePage()),
         GetPage(name: '/snack_page', page: () => const SnackPage()),
+        GetPage(name: '/cart_page', page: () => const CartPage()),
+        GetPage(name: '/favorite_page', page: () => const FavoritePage()),
         GetPage(name: '/detail_page', page: () => const DetailPage(data: {})),
         // GetPage(name: '/favourite_page', page: () => const Favourite_Page()),
         // GetPage(name: '/login_page', page: () => const Login_Page()),
