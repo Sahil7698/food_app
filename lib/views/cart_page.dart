@@ -17,8 +17,6 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   CartController cartController = Get.find<CartController>();
   QuentityController quentityController = Get.find<QuentityController>();
-  //IconController iconController = Get.find<IconController>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +30,7 @@ class _CartPageState extends State<CartPage> {
           },
           icon: const Icon(
             Icons.arrow_back_ios_new_outlined,
+            color: Colors.white,
           ),
         ),
         title: Text(
@@ -63,7 +62,7 @@ class _CartPageState extends State<CartPage> {
                           height: 80,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.green.shade50,
+                            color: Colors.red.shade50,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Padding(
@@ -170,7 +169,7 @@ class _CartPageState extends State<CartPage> {
                                                 style: GoogleFonts.exo2(
                                                   textStyle: const TextStyle(
                                                     fontSize: 18,
-                                                    color: Colors.green,
+                                                    color: Colors.red,
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
@@ -238,7 +237,7 @@ class _CartPageState extends State<CartPage> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Colors.green,
+            color: Colors.red,
           ),
           child: Obx(() {
             return Text(
